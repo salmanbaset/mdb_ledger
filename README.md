@@ -1,4 +1,4 @@
-# Implementing Cryptographically Verifiable Change Historing using MongoDB (aka Ledger)
+# Implementing Cryptographically Verifiable Change History using MongoDB (aka Ledger)
 
 ## 1. Problem Statement
 
