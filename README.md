@@ -112,3 +112,8 @@ Verify change history of a document.
 ret = mycol.verify_one_ledger({"_ledgermeta.orig_id": inserted_id}, client)
 print (ret)
 ```
+
+## 5. Can I use this code in production?
+
+This code is a proof-of-concept implementation of cryptographically verifiable
+change history using MongoDB. It is not meant for production usage.
