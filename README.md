@@ -2,19 +2,19 @@
 
 ## 1. Problem Statement
 
-Organizations in industries such as finance, insurance, and supply chain have to (1) record complete changes to an information over time and (2) ensure that these changes have not been tampered with. The former requires storing all changes to a record over time. The later is often implemented with a combination of database auditing and security controls but it does lend to easy verification. 
+Organizations in industries such as finance, insurance, and supply chain have to (1) record complete changes to an information over time and (2) ensure that these changes have not been tampered with. The former requires storing all changes to a record over time. The later is often implemented with a combination of database auditing and security controls but it does not lead to easy verification. 
 
 
 This is a proof-of-concept implementation of a library for implementing cryptographically verifiable change history of documents stored in MongoDB. The goals are two-fold:
 
-1) Demonstrate creation of a document store with a cryptographically verifiable change history, while preserving the query interface that developers love.
-2) Gather feedback on how similar functionality can address and simplify the data integrity needs of an application.
+1) Demonstrate creation of a document store with a cryptographically verifiable change history, while using MongoDB MQL and API.
+2) Gather feedback on how such a functionality can address and simplify the data integrity needs of an application.
 
 
 ## 2. Common Questions
 
 ### 2.1 Does cyptographically verifiable change history constitute a Ledger?
-Ledgers are useful for applications in areas such as accounting, audit, HR, crypto, and compliance. 
+Ledgers are potentially useful for applications in areas such as drug development, accounting, audit, HR, crypto, and compliance. 
 
 A common underlying themes for applications in the aforementioned areas is that information is stored in append-only mode. The assumption is that once the information has been stored in a ledger, it would not later be changed by an unauthorized entity. If a change is made to the information stored in a ledger, the change can be detected (e.g., using offline or online techniques). Cryptographic verification of change history helps determine information tampering in an online manner (e.g., upon document read).
 
@@ -28,10 +28,10 @@ In MongoDB, auditing can be enabled to record any changes made to documents. How
 
 This proof-of-concept library is implemented in Python. It provides functions to store 
 documents in a collection along with cryptographic tamper-evidence (presently, a SHA256 
-over the document along with document metadata created by the library). 
-Any updates to an existing document automatically results into a new copy of 
+over the document and its history (if any) along with document metadata created 
+by the library). Any updates to an existing document automatically results into a new copy of 
 the document being inserted. The current and previous versions of a document are 
-stored in a separate collection. The name of this separate collection is 
+stored in separate collection. The name of this separate collection is 
 `collectionname_history`. Any insertion or updates in this `history` collection
 are managed by the library.
 
